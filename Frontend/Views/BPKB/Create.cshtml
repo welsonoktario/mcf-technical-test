@@ -1,0 +1,135 @@
+@model CreateBpkbViewModel
+
+@{
+    ViewData["Title"] = "Tambah BPKB";
+}
+
+<form asp-action="Create" method="post">
+    <div class="grid grid-rows-5 grid-flow-col gap-x-16">
+        <div class="form-control w-full">
+            <div class="label">
+                <span class="label-text">Agreement Number</span>
+            </div>
+            <input name="agreementNumber" type="text" placeholder="Agreement number" class="input input-bordered w-full" value="@Model.FormData?.AgreementNumber" />
+            @if (Model.Errors != null && Model.Errors.ContainsKey("AgreementNumber") && Model.Errors["AgreementNumber"].Length > 0)
+            {
+                <div class="label">
+                    <span class="label-text-alt text-error">@Model.Errors["AgreementNumber"][0]</span>
+                </div>
+            }
+        </div>
+        <div class="form-control w-full">
+            <div class="label">
+                <span class="label-text">Branch Id</span>
+            </div>
+            <input name="branchId" type="text" placeholder="Branch Id" class="input input-bordered w-full" value="@Model.FormData?.BranchId" />
+            @if (Model.Errors != null && Model.Errors.ContainsKey("BranchId") && Model.Errors["BranchId"].Length > 0)
+            {
+                <div class="label">
+                    <span class="label-text-alt text-error">@Model.Errors["BranchId"][0]</span>
+                </div>
+            }
+        </div>
+        <div class="form-control w-full">
+            <div class="label">
+                <span class="label-text">No. BPKB</span>
+            </div>
+            <input name="bpkbNo" type="text" placeholder="Nomor BPKB" class="input input-bordered w-full" value="@Model.FormData?.BpkbNo" />
+            @if (Model.Errors != null && Model.Errors.ContainsKey("BpkbNo") && Model.Errors["BpkbNo"].Length > 0)
+            {
+                <div class="label">
+                    <span class="label-text-alt text-error">@Model.Errors["BpkbNo"][0]</span>
+                </div>
+            }
+        </div>
+        <div class="form-control w-full">
+            <div class="label">
+                <span class="label-text">Tanggal BPKB In</span>
+            </div>
+            <input name="bpkbDateIn" type="date" placeholder="Tanggal BPKB in" class="input input-bordered w-full" value="@Model.FormData?.BpkbDateIn" />
+            @if (Model.Errors != null && Model.Errors.ContainsKey("BpkbDateIn") && Model.Errors["BpkbDateIn"].Length > 0)
+            {
+                <div class="label">
+                    <span class="label-text-alt text-error">@Model.Errors["BpkbDateIn"][0]</span>
+                </div>
+            }
+        </div>
+        <div class="form-control w-full">
+            <div class="label">
+                <span class="label-text">Tanggal BPKB</span>
+            </div>
+            <input name="bpkbDate" type="date" placeholder="Tanggal BPKB" class="input input-bordered w-full" value="@Model.FormData?.BpkbDate" />
+            @if (Model.Errors != null && Model.Errors.ContainsKey("BpkbDate") && Model.Errors["BpkbDate"].Length > 0)
+            {
+                <div class="label">
+                    <span class="label-text-alt text-error">@Model.Errors["BpkbDate"][0]</span>
+                </div>
+            }
+        </div>
+        <div class="form-control w-full">
+            <div class="label">
+                <span class="label-text">No. Faktur</span>
+            </div>
+            <input name="fakturNo" type="text" placeholder="Nomor faktur" class="input input-bordered w-full" value="@Model.FormData?.FakturNo" />
+            @if (Model.Errors != null && Model.Errors.ContainsKey("FakturNo") && Model.Errors["FakturNo"].Length > 0)
+            {
+                <div class="label">
+                    <span class="label-text-alt text-error">@Model.Errors["FakturNo"][0]</span>
+                </div>
+            }
+        </div>
+        <div class="form-control w-full">
+            <div class="label">
+                <span class="label-text">Tanggal Faktur</span>
+            </div>
+            <input name="fakturDate" type="date" placeholder="Tanggal faktur" class="input input-bordered w-full" value="@Model.FormData?.FakturDate" />
+            @if (Model.Errors != null && Model.Errors.ContainsKey("FakturDate") && Model.Errors["FakturDate"].Length > 0)
+            {
+                <div class="label">
+                    <span class="label-text-alt text-error">@Model.Errors["FakturDate"][0]</span>
+                </div>
+            }
+        </div>
+        <div class="form-control w-full">
+            <div class="label">
+                <span class="label-text">Nomor Polisi</span>
+            </div>
+            <input name="PoliceNo" type="text" placeholder="Nomor polisi" class="input input-bordered w-full" value="@Model.FormData?.PoliceNo" />
+            @if (Model.Errors != null && Model.Errors.ContainsKey("PoliceNo") && Model.Errors["PoliceNo"].Length > 0)
+            {
+                <div class="label">
+                    <span class="label-text-alt text-error">@Model.Errors["PoliceNo"][0]</span>
+                </div>
+            }
+        </div>
+        <div class="form-control w-full">
+            <div class="label">
+                <span class="label-text">Lokasi Penyimpanan</span>
+            </div>
+            <select name="storageLocationId" class="select select-bordered">
+                <option value="" disabled selected>Pilih lokasi penyimpanan</option>
+                @foreach (var storageLocation in Model.StorageLocations)
+                {
+                    @if (storageLocation.LocationId == Model.FormData?.StorageLocationId)
+                    {
+                        <option value="@storageLocation.LocationId" selected>@storageLocation.LocationName</option>
+                    } else
+                    {
+                        <option value="@storageLocation.LocationId">@storageLocation.LocationName</option>
+                    }
+                }
+            </select>
+            @if (Model.Errors != null && Model.Errors.ContainsKey("StorageLocationId") && Model.Errors["StorageLocationId"].Length > 0)
+            {
+                <div class="label">
+                    <span class="label-text-alt text-error">@Model.Errors["StorageLocationId"][0]</span>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="w-full flex justify-end items-center gap-x-4 mt-6">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-ghost">Batal</a>
+        <button class="btn btn-primary">Simpan</button>
+    </div>
+</form>

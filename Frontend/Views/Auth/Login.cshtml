@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="flex items-center justify-center h-full">
+    <form class="card bg-base-100 w-96 shadow-lg m-auto" asp-action="ProcessLogin">
+        <div class="card-body">
+            <h2 class="card-title mb-6">Login</h2>
+            <input class="input input-bordered w-full" type="text" name="username" placeholder="User Name" />
+            <input class="input input-bordered w-full" type="password" name="password" placeholder="Password" />
+            <button class="btn btn-primary mt-4">Login</button>
+        </div>
+    </form>
+</div>

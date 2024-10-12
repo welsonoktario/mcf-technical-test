@@ -1,0 +1,55 @@
+﻿@model HomeViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <div class="flex justify-between items-center">
+        <h2 class="text-xl font-bold">Data BPKB</h2>
+        <a class="btn btn-primary" asp-controller="Bpkb" asp-action="Create">Tambah</a>
+    </div>
+
+    <div class="border rounded-lg bg-base-100 shadow-lg overflow-hidden mt-4">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Agreement Number</th>
+                    <th>Branch Id</th>
+                    <th>No. BPKB</th>
+                    <th>Tanggal BPKB</th>
+                    <th>Tanggal BPKB In</th>
+                    <th>No. Faktur</th>
+                    <th>Tanggal Faktur</th>
+                    <th>Nomor Polisi</th>
+                    <th>Lokasi Penyimpanan</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Bpkbs != null && Model.Bpkbs.Count > 0)
+                {
+                    @foreach (var item in Model.Bpkbs)
+                    {
+                        <tr>
+                            <td>@item.AgreementNumber</td>
+                            <td>@item.BranchId</td>
+                            <td>@item.BpkbNo</td>
+                            <td>@item.BpkbDate?.ToString("yyyy-MM-dd")</td>
+                            <td>@item.BpkbDateIn?.ToString("yyyy-MM-dd")</td>
+                            <td>@item.FakturNo</td>
+                            <td>@item.FakturDate?.ToString("yyyy-MM-dd")</td>
+                            <td>@item.PoliceNo</td>
+                            <td>@item.StorageLocation.LocationName</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td class="text-center py-4" colspan="9">Data BPKB Kosong</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
