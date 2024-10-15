@@ -23,23 +23,35 @@
                     <th>Tanggal Faktur</th>
                     <th>Nomor Polisi</th>
                     <th>Lokasi Penyimpanan</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @if (Model.Bpkbs != null && Model.Bpkbs.Count > 0)
                 {
-                    @foreach (var item in Model.Bpkbs)
+                    @foreach (var bpkb in Model.Bpkbs)
                     {
                         <tr>
-                            <td>@item.AgreementNumber</td>
-                            <td>@item.BranchId</td>
-                            <td>@item.BpkbNo</td>
-                            <td>@item.BpkbDate?.ToString("yyyy-MM-dd")</td>
-                            <td>@item.BpkbDateIn?.ToString("yyyy-MM-dd")</td>
-                            <td>@item.FakturNo</td>
-                            <td>@item.FakturDate?.ToString("yyyy-MM-dd")</td>
-                            <td>@item.PoliceNo</td>
-                            <td>@item.StorageLocation.LocationName</td>
+                            <td>@bpkb.AgreementNumber</td>
+                            <td>@bpkb.BranchId</td>
+                            <td>@bpkb.BpkbNo</td>
+                            <td>@bpkb.BpkbDate?.ToString("yyyy-MM-dd")</td>
+                            <td>@bpkb.BpkbDateIn?.ToString("yyyy-MM-dd")</td>
+                            <td>@bpkb.FakturNo</td>
+                            <td>@bpkb.FakturDate?.ToString("yyyy-MM-dd")</td>
+                            <td>@bpkb.PoliceNo</td>
+                            <td>@bpkb.StorageLocation.LocationName</td>
+                            <td class="flex gap-x-4 items-center">
+                                <a class="btn btn-neutral" asp-controller="Bpkb" asp-action="Edit" asp-route-agreementNumber="@bpkb.AgreementNumber">
+                                    Edit
+                                </a>
+                                <form asp-action="Delete" asp-controller="Bpkb" method="post">
+                                    <input type="hidden" name="AgreementNumber" value="@bpkb.AgreementNumber" />
+                                    <button type="submit" class="btn btn-error">
+                                        Hapus
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     }
                 }
